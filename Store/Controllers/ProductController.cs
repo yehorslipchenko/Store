@@ -31,28 +31,28 @@ namespace Store.Controllers
         {
             if (!ModelState.IsValid)
             {
-                return new JsonResult("Error while added a product");
+                return BadRequest(new JsonResult("Error while added a product"));
             }
-            Rep.AddProduct(product);
-            return new JsonResult("Product added successfully");
+            await Rep.AddProductAsync(product);
+            return Ok(new JsonResult("Product added successfully"));
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateProduct([FromRoute] int id, [FromBody] Product product)
+        [HttpPut()]
+        public async Task<IActionResult> UpdateProductAsync([FromBody] Product product)
         {
-            if (product == null || id != product.Id)
+            if (product == null)
             {
                 return new JsonResult("Product was not found");
             }
             else
             {
-                Rep.UpdateProduct(product);
+                await Rep.UpdateProductAsync(product);
                 return new JsonResult("Product was update successfully");
             }
         }
 
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteProduct([FromRoute] int id)
+        public async Task<IActionResult> DeleteProductAsync([FromRoute] int id)
         {
             Product findProduct = Rep.FindProduct(id);
             if (findProduct == null)
@@ -61,7 +61,7 @@ namespace Store.Controllers
             }
             else
             {
-                Rep.DeleteProduct(findProduct);
+                await Rep.DeleteProductAsync(findProduct);
                 return new JsonResult("Product was deleted successfully");
             }
         }

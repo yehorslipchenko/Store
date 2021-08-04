@@ -38,7 +38,7 @@ namespace Store
             services.AddDbContext<StoreDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-            });
+            }, ServiceLifetime.Scoped);
 
             services.AddScoped<IRepository, Repository>();
         }
@@ -55,6 +55,15 @@ namespace Store
             app.UseRouting();
 
             app.UseHttpsRedirection();
+
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute
+                (
+                    name: "default",
+                    pattern: "{controller=Product}"
+                );
+            });
         }
     }
 }

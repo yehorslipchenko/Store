@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Store.Data;
 
 namespace Store.Models
@@ -9,14 +10,14 @@ namespace Store.Models
         IEnumerable<Product> GetProducts();
         IEnumerable<Order> GetOrders();
 
-        void AddProduct(Product product);
-        void AddOrder(Order order);
+        Task AddProductAsync(Product product);
+        Task AddOrderAsync(Order order);
 
-        void UpdateProduct(Product product);
-        void UpdateOrder(Order order);
+        Task UpdateProductAsync(Product product);
+        Task UpdateOrderAsync(Order order);
 
-        void DeleteProduct(Product product);
-        void DeleteOrder(Order order);
+        Task DeleteProductAsync(Product product);
+        Task DeleteOrderAsync(Order order);
 
         Product FindProduct(int id);
         Order FindOrder(int id);

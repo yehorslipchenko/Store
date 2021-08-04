@@ -20,13 +20,13 @@ namespace Store.Models
         public IEnumerable<Order> GetOrders() => db.Orders.ToList();
 
 
-        public async void AddProduct(Product product)
+        public async Task AddProductAsync(Product product)
         {
             db.Products.Add(product);
             await db.SaveChangesAsync();
         }
 
-        public async void AddOrder(Order order)
+        public async Task AddOrderAsync(Order order)
         {
             db.Orders.Add(order);
             await db.SaveChangesAsync();
@@ -34,26 +34,26 @@ namespace Store.Models
 
 
 
-        public async void UpdateProduct(Product product)
+        public async Task UpdateProductAsync(Product product)
         {
             db.Products.Update(product);
             await db.SaveChangesAsync();
         }
 
-        public async void UpdateOrder(Order order)
+        public async Task UpdateOrderAsync(Order order)
         {
             db.Orders.Update(order);
             await db.SaveChangesAsync();
         }
 
 
-        public async void DeleteProduct(Product product)
+        public async Task DeleteProductAsync(Product product)
         {
             db.Products.Remove(product);
             await db.SaveChangesAsync();
         }
 
-        public async void DeleteOrder(Order order)
+        public async Task DeleteOrderAsync(Order order)
         {
             db.Orders.Remove(order);
             await db.SaveChangesAsync();
